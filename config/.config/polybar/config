@@ -18,6 +18,9 @@ module-margin-right = 6
 font-0 = NotoSans-Regular:size=11;0
 font-1 = FontAwesome:pixelsize=10;0
 
+tray-position = right
+tray-transparent = false
+
 modules-left = i3
 modules-right = pulseaudio date
 
@@ -57,6 +60,8 @@ fuzzy-match = true
 
 label-focused-foreground = #ffffff
 label-focused-underline = #fba922
+
+label-urgent-underline = #cc3300
 
 label-separator = |
 label-separator-padding = 2

@@ -101,6 +101,7 @@ set $workspace4 "4: "
 set $workspace5  "5: "
 set $workspace6  "6"
 set $workspace7  "7"
+# thunderbird
 set $workspace8  "8: "
 # bibliography
 set $workspace9  "9: "
@@ -139,6 +140,7 @@ workspace $workspace2 output $monitor2
 workspace $workspace3 output $monitor2
 workspace $workspace4 output $monitor1
 workspace $workspace5 output $monitor1
+workspace $workspace8 output $monitor8
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -176,36 +178,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# No mouse warping
+mouse_warping none
 
-# class                 border  bground text    indicator child_border
-client.focused          #4C7899 #285577 #FFFFFF #2E9EF4   #285577
-client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
-
-client.background       #FFFFFF
-
-#bar {
-#	status_command i3blocks
-#	font pango:Noto Sans 11, Font Awesome 11
-#	tray_output primary
-#	colors {
-#	    background #363B3C
-#	    statusline #FFFFFF
-#	    separator  #666666
-#
-#	    focused_workspace  #4C7899 #285577 #FFFFFF
-#	    active_workspace   #333333 #222222 #FFFFFF
-#	    inactive_workspace #333333 #222222 #888888
-#	    urgent_workspace   #2F343A #900000 #FFFFFF
-#	    binding_mode       #2F343A #900000 #FFFFFF
-#	}
-#}
-
+# Run polybar
 exec_always --no-startup-id ~/.i3/polybar.sh &
-
-# No focus wrapping
 
 # Lock screen
 bindsym $mod+Shift+l exec --no-startup-id i3lock -c 000000
@@ -222,6 +199,7 @@ assign [class="Mail"] → $workspace8
 assign [class="Zotero"] → $workspace9
 
 # Autostart
+exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/mountain.png
 exec --no-startup-id pidgin
 exec --no-startup-id google-chrome --incognito
 exec --no-startup-id clipit
