@@ -148,7 +148,7 @@ new_window pixel 0
 mouse_warping none
 
 # Run polybar
-exec_always --no-startup-id ~/config/i3/polybar.sh &
+exec_always --no-startup-id ~/.config/i3/polybar.sh &
 
 # Lock screen
 bindsym $mod+Shift+l exec --no-startup-id i3lock -c 000000
@@ -171,3 +171,6 @@ exec --no-startup-id google-chrome --incognito
 exec --no-startup-id clipit
 exec --no-startup-id nextcloud
 exec --no-startup-id i3-msg 'exec /usr/bin/pulseaudio --start'
+exec --no-startup-id wicd-client --tray
+exec --no-startup-id battery-monitor
+exec --no-startup-id pasystray
