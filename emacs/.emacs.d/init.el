@@ -67,6 +67,9 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
   
 
+;; Use utf-8
+(set-language-environment "UTF-8")
+
 ;; Disable menu bar
 (menu-bar-mode -1)
 
@@ -81,3 +84,17 @@
 
 ;; use ibuffer instead of list-buffers
 (defalias 'list-buffers 'ibuffer)
+
+;; Use y and n for yes and no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Disable bell
+(setq ring-bell-function 'ignore)
+
+;; Disable backups and autosaves
+(setq make-backup-file nil)
+(setq auto-save-default nil)
+
+;; Show column and line number
+(line-number-mode 1)
+(column-number-mode 1)
