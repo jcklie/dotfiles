@@ -2,3 +2,7 @@
 
 auto-save-list/
 elpa/
+
+*~
+emacs/.emacs.d/ido.last
+emacs/.emacs.d/recentf

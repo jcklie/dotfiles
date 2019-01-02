@@ -1,0 +1,66 @@
+[colors]
+background = ${xrdb:background:#222}
+foreground = ${xrdb:foreground:#222}
+foreground-alt = ${xrdb:color7:#222}
+focused = ${xrdb:color3:#222}
+urgent = ${xrdb:color1:#222}
+
+[bar/main-bottom]
+dpi=${xrdb:Xft.dpi:-1}
+monitor = ${env:MONITOR:}
+bottom = true
+width = 100%
+height = ${env:HEIGHT:}
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-color = ${bar/main-bottom.background}
+line-size = 2 
+
+spacing = 1 
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+font-0 = NotoSans-Regular:size=9;0
+font-1 = FontAwesome:size=9;0
+
+tray-position = right
+tray-maxsize = ${env:TRAY_SIZE:}
+
+modules-left = i3
+modules-right = pulseaudio date
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+
+label-focused-foreground = ${colors.foreground-alt}
+label-focused-underline = ${colors.focused}
+
+label-urgent-underline = ${colors.urgent}
+
+label-separator = |
+label-separator-padding = 2
+label-seperator-padding-bottom = -2
+label-separator-foreground = #ffb52a
+
+[module/date]
+type = internal/date
+date = %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+
+[module/clock]
+type = internal/date
+interval = 2
+date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+; vim:ft=dosini

@@ -15,22 +15,11 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:Noto Sans 11, Font Awesome 11
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -83,7 +72,7 @@ bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 # Screen configuration
-exec_always --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-3 --off --output DP-2 --off --output DP-1 --off --output HDMI-2 --mode 1920x1080 --pos 1920x0 --rotate normal
+exec_always --no-startup-id ~/.config/i3/monitors.sh
 
 # Workspace names
 # Terminal
@@ -149,40 +138,20 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Move workspace
 bindsym $mod+m move workspace to output left
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# Gaps
+gaps inner 10
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
+# Remove title bar
+new_window pixel 0
 
 # No mouse warping
 mouse_warping none
 
 # Run polybar
-exec_always --no-startup-id ~/.i3/polybar.sh &
+exec_always --no-startup-id ~/.config/i3/polybar.sh &
 
 # Lock screen
-bindsym $mod+Shift+l exec --no-startup-id i3lock -i ~/.i3/lock.png
+bindsym $mod+Shift+l exec --no-startup-id i3lock -i ~/.config/i3/lock.png
 
 # Floating windows
 for_window [class="Pidgin"] floating enable
@@ -198,10 +167,8 @@ assign [class="Zotero"] → $workspace9
 assign [class="de-tudarmstadt-ukp-inception-INCEpTION"] → $workspace0
 
 # Autostart
-exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/mountain.png
-exec --no-startup-id pidgin
+exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/wallpaper.jpg
 exec --no-startup-id google-chrome --incognito
-exec --no-startup-id clipit
-exec --no-startup-id nextcloud
 exec --no-startup-id i3-msg 'exec /usr/bin/pulseaudio --start'
 
+exec --no-startup-id bash ~/.config/i3/autostart.sh
