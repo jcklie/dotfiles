@@ -182,10 +182,11 @@ mouse_warping none
 exec_always --no-startup-id ~/.i3/polybar.sh &
 
 # Lock screen
-bindsym $mod+Shift+l exec --no-startup-id i3lock -c 000000
+bindsym $mod+Shift+l exec --no-startup-id i3lock -i ~/.i3/lock.png
 
 # Floating windows
 for_window [class="Pidgin"] floating enable
+for_window [class="de-tudarmstadt-ukp-inception-INCEpTION"] floating enable
 
 # Default workspaces
 assign [class="xfce4-terminal"] → $workspace1
@@ -194,6 +195,7 @@ assign [class="Pidgin"] → $workspace3
 assign [class="jetbrains-idea-ce"] → $workspace4
 assign [class="Mail"] → $workspace8
 assign [class="Zotero"] → $workspace9
+assign [class="de-tudarmstadt-ukp-inception-INCEpTION"] → $workspace0
 
 # Autostart
 exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/mountain.png
@@ -202,3 +204,4 @@ exec --no-startup-id google-chrome --incognito
 exec --no-startup-id clipit
 exec --no-startup-id nextcloud
 exec --no-startup-id i3-msg 'exec /usr/bin/pulseaudio --start'
+
