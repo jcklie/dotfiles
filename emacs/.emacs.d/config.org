@@ -1,0 +1,132 @@
+* User Interface tweaks
+
+** Theme
+
+I like to use gruvbox as my theme.
+
+#+BEGIN_SRC emacs-lisp
+;; Set theme
+(use-package gruvbox-theme
+  :ensure t
+  :init
+  (load-theme 'gruvbox t))
+#+END_SRC
+
+** Disable menu bar
+
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode -1)
+#+END_SRC
+
+* Random quality of life things
+
+** Character encoding
+
+Use utf-8 (important for my windows machine).
+
+#+BEGIN_SRC emacs-lisp
+(set-language-environment "UTF-8")
+#+END_SRC
+
+** Locale
+
+System locale to use for formatting time values.
+
+#+BEGIN_SRC emacs-lisp
+(setq system-time-locale "C")
+#+END_SRC
+
+** ibuffer
+
+Use ibuffer instead of list-buffers
+
+#+BEGIN_SRC emacs-lisp
+(defalias 'list-buffers 'ibuffer)
+#+END_SRC
+
+** y-or-n-p
+
+Use y and n for yes and no
+
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** Disable bell
+
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function 'ignore)
+#+END_SRC
+
+** Backups and autosave 
+
+Disable backups and autosaves
+
+#+BEGIN_SRC emacs-lisp
+(setq make-backup-file nil)
+(setq auto-save-default nil)
+#+END_SRC
+
+** Show column and line number
+
+#+BEGIN_SRC emacs-lisp
+(line-number-mode 1)
+(column-number-mode 1)
+#+END_SRC
+
+
+* Org mode
+
+** Initialization
+
+Activate org-mode and add my notes to org-agenda.
+
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :init
+  (load-library "find-lisp")
+  (setq org-agenda-files (find-lisp-find-files "~/notes" "\\.org$"))
+  :bind
+  (("C-c a" . org-agenda)))
+#+END_SRC
+
+** Configure keywords
+
+I like to have more possible states for my TODOs than default.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
+#+END_SRC
+
+** Add nicer bullets
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+
+* ido
+
+Enable ido-mode.
+
+#+BEGIN_SRC emacs-lisp
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-use-virtual-buffers t)
+(ido-mode 1)
+#+END_SRC
+
+
+* avy
+
+Jump to things in Emacs tree-style.
+
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :ensure t
+  :bind ("M-s" . avy-goto-char-2))
+#+END_SRC
