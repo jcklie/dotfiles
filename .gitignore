@@ -6,3 +6,5 @@ elpa/
 *~
 emacs/.emacs.d/ido.last
 emacs/.emacs.d/recentf
+
+config.el
