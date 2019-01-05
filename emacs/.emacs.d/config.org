@@ -18,6 +18,12 @@ I like to use gruvbox as my theme.
 (menu-bar-mode -1)
 #+END_SRC
 
+** Maximize emacs on start
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+END_SRC
+
 * Random quality of life things
 
 ** Character encoding
@@ -74,7 +80,6 @@ Disable backups and autosaves
 (column-number-mode 1)
 #+END_SRC
 
-
 * Org mode
 
 ** Initialization
@@ -108,7 +113,6 @@ I like to have more possible states for my TODOs than default.
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
-
 * ido
 
 Enable ido-mode.
@@ -119,7 +123,6 @@ Enable ido-mode.
 (setq ido-use-virtual-buffers t)
 (ido-mode 1)
 #+END_SRC
-
 
 * avy
 
