@@ -12,10 +12,10 @@
     ("aaffceb9b0f539b6ad6becb8e96a04f2140c8faa1de8039a343a4f1e009174fb" default)))
  '(org-agenda-files
    (quote
-    ("/home/klie/notes/topics/someday.org" "/home/klie/notes/topics/listen-read-watch.org" "/home/klie/notes/projects/chinese.org" "/home/klie/notes/dates/2018-november.org" "/home/klie/notes/journal/2018_48.org")) t)
+    ("/home/klie/notes/topics/someday.org" "/home/klie/notes/topics/listen-read-watch.org" "/home/klie/notes/projects/chinese.org" "/home/klie/notes/dates/2018-november.org" "/home/klie/notes/journal/2018_48.org")))
  '(package-selected-packages
    (quote
-    (avy org-bullets gruvbox evil gruvbox-theme dracula-theme use-package org))))
+    (try counsel avy org-bullets gruvbox evil gruvbox-theme dracula-theme use-package org))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
