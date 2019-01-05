@@ -102,10 +102,16 @@ I like to have more possible states for my TODOs than default.
 ** Add nicer bullets
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-bullets
-  :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;;(use-package org-bullets
+;;  :ensure t
+;;  :config
+;;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq org-startup-indented t)
+(setq org-hide-leading-stars t)
+(setq org-odd-level-only nil)
 #+END_SRC
 
 
