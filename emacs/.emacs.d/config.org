@@ -80,8 +80,7 @@ Disable backups and autosaves
 (column-number-mode 1)
 #+END_SRC
 
-* Org mode
-
+* org-mode
 ** Initialization
 
 Activate org-mode and add my notes to org-agenda.
@@ -90,7 +89,10 @@ Activate org-mode and add my notes to org-agenda.
 (use-package org
   :init
   (load-library "find-lisp")
-  (setq org-agenda-files (find-lisp-find-files "~/notes" "\\.org$"))
+  (setq org-agenda-files 
+    (append
+      (find-lisp-find-files "~/notes" "\\.org$")
+      (find-lisp-find-files "~/nhungnas/org" "\\.org$")))
   :bind
   (("C-c a" . org-agenda)))
 #+END_SRC
@@ -104,19 +106,39 @@ I like to have more possible states for my TODOs than default.
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
 #+END_SRC
 
-** Add nicer bullets
-
-#+BEGIN_SRC emacs-lisp
-;;(use-package org-bullets
-;;  :ensure t
-;;  :config
-;;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-#+END_SRC
+** Add indent
 
 #+BEGIN_SRC emacs-lisp
 (setq org-startup-indented t)
 (setq org-hide-leading-stars t)
 (setq org-odd-level-only nil)
+#+END_SRC
+
+** org-capture
+
+Set keycommand of 'org-capture to C-c c
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-tag-alist `(
+              ("sysadmin"   . ?s)
+              ("home"       . ?h)
+              ("INCEpTION"  . ?i)
+              ("phd"        . ?p)
+ ))
+(setq org-default-notes-file "~/nhungnas/org/organizer.org")
+(setq org-capture-templates '(
+  (;; TODO
+    "t"                ; key
+    "Todo"             ; description
+    entry              ; type
+    (file+headline org-default-notes-file "Tasks")       ; target
+    "* TODO %?%^g\n %i\n%U\n"
+    :prepend t         ; properties
+    :empty-lines 1     ; properties
+    :created t         ; properties
+  )  
+))
 #+END_SRC
 
 * ivy
@@ -148,6 +170,7 @@ It looks like counsel is a requirement for swiper.
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ))
 #+END_SRC
+
 * avy
 
 Jump to things in Emacs tree-style.
@@ -157,3 +180,75 @@ Jump to things in Emacs tree-style.
   :ensure t
   :bind ("M-s" . avy-goto-char-2))
 #+END_SRC
+
+* Bibliography
+
+I follow https://www.reddit.com/r/emacs/comments/4gudyw/help_me_with_my_orgmode_workflow_for_notetaking/d2l16uj for the note taking workflow.
+
+** org-ref
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-ref
+  :after org
+  :ensure t
+  :init
+  (setq 
+      org-ref-notes-directory "~/nhungnas/org/references/notes"
+      org-ref-bibliography-notes "~/nhungnas/org/references/articles.org"
+      org-ref-default-bibliography "~/nhungnas/org/references/articles.bib"
+      reftex-default-bibliography "~/nhungnas/org/references/articles.bib"
+      org-ref-pdf-directory "~/nhungnas/org/references/pdfs/"
+      org-ref-completion-library 'org-ref-ivy-cite)
+  :bind
+  (("C-c C-b n" . org-ref-open-bibtex-notes)))
+#+END_SRC
+
+** ivy-bibtex
+
+ivy-bibtex allows me to search and manage my BibTeX bibliography. I also use it for taking notes.
+
+#+BEGIN_SRC emacs-lisp
+(use-package ivy-bibtex
+  :ensure t
+  :init
+  ;; ivy-bibtex requires ivy's `ivy--regex-ignore-order` regex builder, which
+  ;; ignores the order of regexp tokens when searching for matching candidates.
+  (setq 
+    ivy-re-builders-alist '((ivy-bibtex . ivy--regex-ignore-order) (t . ivy--regex-plus))
+    ;; Set paths for bibliography and notes the same as in org-ref
+    bibtex-completion-bibliography org-ref-default-bibliography
+    bibtex-completion-library-path org-ref-pdf-directory
+    bibtex-completion-notes-path org-ref-bibliography-notes
+    ;; Set action menu
+    ivy-bibtex-default-action 'ivy-bibtex-edit-notes)
+  :bind
+  (("C-C C-b b" . ivy-bibtex)))
+#+END_SRC
+
+* Window management
+
+** windmove
+
+Move between windows by holding the shift key and with the arrows.
+
+#+BEGIN_SRC emacs-lisp
+(windmove-default-keybindings)
+#+END_SRC
+
+** ace-window
+
+Jump to windows with "C-x o".
+
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :init
+  (progn
+    (global-set-key [remap other-window] 'ace-window)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
+    ))
+#+END_SRC
+
+
