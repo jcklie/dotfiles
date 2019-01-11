@@ -127,7 +127,7 @@ Set keycommand of 'org-capture to C-c c
     "Todo"             ; description
     entry              ; type
     (file+headline org-default-notes-file "Tasks")       ; target
-    "* TODO %?%^g\n %i\n%T\n"
+    "* TODO %?%^g\n %i\n%U\n"
     :prepend t         ; properties
     :empty-lines 1     ; properties
     :created t         ; properties
@@ -136,6 +136,7 @@ Set keycommand of 'org-capture to C-c c
 #+END_SRC
 
 * ivy
+
 ** Counsel
 
 It looks like counsel is a requirement for swiper.
@@ -173,6 +174,7 @@ Jump to things in Emacs tree-style.
   :ensure t
   :bind ("M-s" . avy-goto-char-2))
 #+END_SRC
+
 * Bibliography
 
 I follow https://www.reddit.com/r/emacs/comments/4gudyw/help_me_with_my_orgmode_workflow_for_notetaking/d2l16uj for the note taking workflow.
@@ -216,8 +218,6 @@ ivy-bibtex allows me to search and manage my BibTeX bibliography. I also use it 
   :bind
   (("C-C C-b b" . ivy-bibtex)))
 #+END_SRC
-
-** hydra
 
 * Window management
 
