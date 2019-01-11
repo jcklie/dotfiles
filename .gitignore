@@ -5,6 +5,8 @@ elpa/
 
 *~
 emacs/.emacs.d/ido.last
-emacs/.emacs.d/recentf
+emacs/.emacs.d/recent*
+emacs/.emacs.d/bookmarks
+emacs/.emacs.d/url
 
 config.el
