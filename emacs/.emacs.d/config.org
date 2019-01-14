@@ -91,7 +91,6 @@ Activate org-mode and add my notes to org-agenda.
   (load-library "find-lisp")
   (setq org-agenda-files 
     (append
-      (find-lisp-find-files "~/notes" "\\.org$")
       (find-lisp-find-files "~/nhungnas/org" "\\.org$")))
   :bind
   (("C-c a" . org-agenda)))
@@ -132,8 +131,8 @@ Set keycommand of 'org-capture to C-c c
     "t"                ; key
     "Todo"             ; description
     entry              ; type
-    (file+headline org-default-notes-file "Tasks")       ; target
-    "* TODO %?%^g\n %i\n%U\n"
+    (file+headline org-default-notes-file "Inbox")       ; target
+    "* TODO %?%^g\n%U"
     :prepend t         ; properties
     :empty-lines 1     ; properties
     :created t         ; properties
@@ -200,7 +199,7 @@ I follow https://www.reddit.com/r/emacs/comments/4gudyw/help_me_with_my_orgmode_
       org-ref-pdf-directory "~/nhungnas/org/references/pdfs/"
       org-ref-completion-library 'org-ref-ivy-cite)
   :bind
-  (("C-c C-b n" . org-ref-open-bibtex-notes)))
+  (("C-c b n" . org-ref-open-bibtex-notes)))
 #+END_SRC
 
 ** ivy-bibtex
