@@ -25,7 +25,6 @@ I like to use gruvbox as my theme.
 #+END_SRC
 
 * Random quality of life things
-
 ** Character encoding
 
 Use utf-8 (important for my windows machine).
@@ -66,11 +65,24 @@ Use y and n for yes and no
 
 ** Backups and autosave 
 
+*** Backups
+
 Disable backups and autosaves
 
 #+BEGIN_SRC emacs-lisp
 (setq make-backup-file nil)
-(setq auto-save-default nil)
+#+END_SRC
+
+*** Autosave
+
+#+BEGIN_SRC emacs-lisp
+(use-package real-auto-save
+  :ensure t
+  :init
+  (setq real-auto-save-interval 60)
+  :config
+  (add-hook 'prog-mode-hook 'real-auto-save-mode)
+)
 #+END_SRC
 
 ** Show column and line number
@@ -199,7 +211,7 @@ I follow https://www.reddit.com/r/emacs/comments/4gudyw/help_me_with_my_orgmode_
       org-ref-pdf-directory "~/nhungnas/org/references/pdfs/"
       org-ref-completion-library 'org-ref-ivy-cite)
   :bind
-  (("C-c b n" . org-ref-open-bibtex-notes)))
+  (("C-c C-b n" . org-ref-open-bibtex-notes)))
 #+END_SRC
 
 ** ivy-bibtex
@@ -221,7 +233,7 @@ ivy-bibtex allows me to search and manage my BibTeX bibliography. I also use it 
     ;; Set action menu
     ivy-bibtex-default-action 'ivy-bibtex-edit-notes)
   :bind
-  (("C-C C-b b" . ivy-bibtex)))
+  (("C-c C-b b" . ivy-bibtex)))
 #+END_SRC
 
 * Window management
@@ -233,21 +245,4 @@ Move between windows by holding the shift key and with the arrows.
 #+BEGIN_SRC emacs-lisp
 (windmove-default-keybindings)
 #+END_SRC
-
-** ace-window
-
-Jump to windows with "C-x o".
-
-#+BEGIN_SRC emacs-lisp
-(use-package ace-window
-  :ensure t
-  :init
-  (progn
-    (global-set-key [remap other-window] 'ace-window)
-    (custom-set-faces
-     '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
-    ))
-#+END_SRC
-
 
