@@ -85,6 +85,11 @@ Disable backups and autosaves
 )
 #+END_SRC
 
+*** Autorevert
+
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode t)
+#+END_SRC
 ** Show column and line number
 
 #+BEGIN_SRC emacs-lisp
