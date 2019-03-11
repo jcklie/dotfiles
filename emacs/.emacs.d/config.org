@@ -122,7 +122,7 @@ I like to have more possible states for my TODOs than default.
 
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
 #+END_SRC
 
 ** Add indent
@@ -168,24 +168,21 @@ Set keycommand of 'org-capture to C-c c
   :config
   (org-super-agenda-mode 1)
   (setq org-super-agenda-groups '(
-    (:name "Next items"
-     :todo "NEXT"
-     :time-grid t)
-    (:name "Private"
-     :order 7
-     :tag ("chinese" "health" "private" "learn" "codes"))
-    (:name "Backlog"
-     :order 3
-     :scheduled t)
-    (:name "Waiting"
-     :todo "WAITING" 
-     :order 8)
-    (:name "Someday"
-     :todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
-     :order 9)
-    (:name "Deadlines"
-     :deadline future
-     :order 10)
+    (:name "Today\n"
+          :time-grid t
+          :tag ("today")
+          :deadline today
+          :scheduled today)
+    (:name "Personal\n"
+     :tag ("chinese" "health" "private" "learn" "codes" "perso"))
+    (:name "Overdue\n"
+      :deadline past)
+    (:name "Reschedule/Do\n"
+      :scheduled past)
+    (:name "Due soon\n"
+      :deadline future)
+    (:name "Waiting\n"
+      :todo "WAIT")
 )))
 #+END_SRC
 * ivy
