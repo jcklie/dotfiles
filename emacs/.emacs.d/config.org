@@ -1,5 +1,4 @@
 * User Interface tweaks
-
 ** Theme
 
 I like to use gruvbox as my theme.
@@ -97,6 +96,10 @@ Disable backups and autosaves
 (column-number-mode 1)
 #+END_SRC
 
+** Clipboard
+#+BEGIN_EXPORT emacs-lisp
+(setq x-select-enable-clipboard t)
+#+END_EXPORT
 * org
 ** Initialization
 
@@ -264,7 +267,8 @@ ivy-bibtex allows me to search and manage my BibTeX bibliography. I also use it 
     bibtex-completion-library-path org-ref-pdf-directory
     bibtex-completion-notes-path org-ref-bibliography-notes
     ;; Set action menu
-    ivy-bibtex-default-action 'ivy-bibtex-edit-notes)
+    ivy-bibtex-default-action 'ivy-bibtex-edit-notes
+    bibtex-completion-additional-search-fields '(tags))
   :bind
   (("C-c C-b b" . ivy-bibtex)))
 #+END_SRC
