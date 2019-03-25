@@ -109,9 +109,11 @@ Activate org-mode and add my notes to org-agenda.
 (use-package org
   :init
   (load-library "find-lisp")
-  (setq org-agenda-files 
-    (append
-      (find-lisp-find-files "~/nhungnas/org" "\\.org$")))
+  (setq 
+    org-agenda-files (append
+      (find-lisp-find-files "~/nhungnas/org" "\\.org$"))
+    org-agenda-skip-scheduled-if-done t
+  )
   :bind
   (("C-c a" . org-agenda)))
 #+END_SRC
