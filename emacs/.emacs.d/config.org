@@ -1,5 +1,13 @@
-* User Interface tweaks
-** Theme
+* General
+** Set default directory
+
+#+BEGIN_SRC emacs-lisp
+(setq default-directory "~/nhungnas" )
+(cd default-directory)
+#+END_SRC
+
+** User Interface tweaks
+*** Theme
 
 I like to use gruvbox as my theme.
 
@@ -11,20 +19,20 @@ I like to use gruvbox as my theme.
   (load-theme 'gruvbox t))
 #+END_SRC
 
-** Disable menu bar
+*** Disable menu bar
 
 #+BEGIN_SRC emacs-lisp
 (menu-bar-mode -1)
 #+END_SRC
 
-** Maximize emacs on start
+*** Maximize emacs on start
 
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+END_SRC
 
-* Random quality of life things
-** Character encoding
+** Random quality of life things
+*** Character encoding
 
 Use utf-8 (important for my windows machine).
 
@@ -32,7 +40,7 @@ Use utf-8 (important for my windows machine).
 (set-language-environment "UTF-8")
 #+END_SRC
 
-** Locale
+*** Locale
 
 System locale to use for formatting time values.
 
@@ -40,7 +48,7 @@ System locale to use for formatting time values.
 (setq system-time-locale "C")
 #+END_SRC
 
-** ibuffer
+*** ibuffer
 
 Use ibuffer instead of list-buffers
 
@@ -48,7 +56,7 @@ Use ibuffer instead of list-buffers
 (defalias 'list-buffers 'ibuffer)
 #+END_SRC
 
-** y-or-n-p
+*** y-or-n-p
 
 Use y and n for yes and no
 
@@ -56,15 +64,15 @@ Use y and n for yes and no
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-** Disable bell
+*** Disable bell
 
 #+BEGIN_SRC emacs-lisp
 (setq ring-bell-function 'ignore)
 #+END_SRC
 
-** Backups and autosave 
+*** Backups and autosave 
 
-*** Backups
+**** Backups
 
 Disable backups and autosaves
 
@@ -72,7 +80,13 @@ Disable backups and autosaves
 (setq make-backup-file nil)
 #+END_SRC
 
-*** Autosave
+**** Move backup directory
+
+#+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+END_SRC
+
+**** Autosave
 
 #+BEGIN_SRC emacs-lisp
 (use-package real-auto-save
@@ -84,22 +98,24 @@ Disable backups and autosaves
 )
 #+END_SRC
 
-*** Autorevert
+**** Autorevert
 
 #+BEGIN_SRC emacs-lisp
 (global-auto-revert-mode t)
 #+END_SRC
-** Show column and line number
+
+*** Show column and line number
 
 #+BEGIN_SRC emacs-lisp
 (line-number-mode 1)
 (column-number-mode 1)
 #+END_SRC
 
-** Clipboard
+*** Clipboard
 #+BEGIN_EXPORT emacs-lisp
 (setq x-select-enable-clipboard t)
 #+END_EXPORT
+
 * org
 ** Initialization
 
@@ -110,9 +126,10 @@ Activate org-mode and add my notes to org-agenda.
   :init
   (load-library "find-lisp")
   (setq 
-    org-agenda-files (append
-      (find-lisp-find-files "~/nhungnas/org" "\\.org$"))
+    org-agenda-files '("~/nhungnas/org/organizer.org" )
     org-agenda-skip-scheduled-if-done t
+    org-agenda-span 1
+    org-deadline-warning-days 60
   )
   :bind
   (("C-c a" . org-agenda)))
@@ -142,12 +159,13 @@ Set keycommand of 'org-capture to C-c c
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-tag-alist `(
-              ("sysadmin"   . ?s)
-              ("home"       . ?h)
-              ("INCEpTION"  . ?i)
-              ("phd"        . ?p)
+              ("@work"        . ?w)
+              ("@home"        . ?h)
+              ("@hobby"       . ?b)
+              ("@learn"       . ?l)
  ))
 (setq org-default-notes-file "~/nhungnas/org/organizer.org")
+(setq org-refile-targets (quote (("organizer.org" :level . 2))))
 (setq org-capture-templates '(
   (;; TODO
     "t"                ; key
@@ -160,6 +178,16 @@ Set keycommand of 'org-capture to C-c c
     :created t         ; properties
   )  
 ))
+#+END_SRC
+
+** org-habit 
+
+*** Enable the org-habit Orgmode extension
+
+#+BEGIN_SRC emacs-lisp
+(require 'org-habit)
+(add-to-list 'org-modules 'org-habit t)
+(setq org-log-into-drawer t)
 #+END_SRC
 
 ** org-super-agenda
@@ -175,17 +203,15 @@ Set keycommand of 'org-capture to C-c c
           :tag ("today")
           :deadline today
           :scheduled today)
-    (:name "Personal\n"
-     :tag ("chinese" "health" "private" "learn" "codes" "perso"))
-    (:name "Overdue\n"
-      :deadline past)
-    (:name "Reschedule/Do\n"
-      :scheduled past)
-    (:name "Due soon\n"
-      :deadline future)
-    (:name "Waiting\n"
-      :todo "WAIT")
-)))
+    (:name "Upcoming Deadlines"
+            :deadline future
+            :order 10)
+    (:name "Habits"
+          :habit t
+          :order 7)          
+  )
+  )
+)
 #+END_SRC
 * ivy
 
