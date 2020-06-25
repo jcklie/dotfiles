@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/jck/.oh-my-zsh"
+export ZSH="/home/klie/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -97,4 +97,9 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 alias chrome="google-chrome-stable --incognito"
 alias vpn-ukp="sudo openvpn ~/vpn/ukp-vpn.ovpn"
+alias avenv="source venv/bin/activate"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+if type nvim > /dev/null 2>&1; then
+	alias vim='nvim'
+fi
