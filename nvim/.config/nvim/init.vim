@@ -4,7 +4,8 @@ syntax on
 
 " Leader
 nnoremap <SPACE> <Nop>
-let mapleader=" "
+let mapleader = " "
+let maplocalleader = " "
 
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -41,8 +42,9 @@ inoremap jj <ESC>
 
 " vimwiki/vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_dir_link = "index"
 
-"itchyny/lightline.vim
+" itchyny/lightline.vim
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ }
@@ -51,3 +53,6 @@ let g:lightline = {
 let g:fzf_layout = { 'window': 'enew' }
 nnoremap <Leader>o :FZF<CR> 
 nnoremap <Leader>b :buffers<CR>
+
+" Windows paste
+:source $VIMRUNTIME/mswin.vim

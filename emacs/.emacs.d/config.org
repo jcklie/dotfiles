@@ -198,6 +198,9 @@ Set keycommand of 'org-capture to C-c c
   :config
   (org-super-agenda-mode 1)
   (setq org-super-agenda-groups '(
+    (:name "Habits"
+          :habit t
+          :order 7)
     (:name "Today\n"
           :time-grid t
           :tag ("today")
@@ -206,9 +209,9 @@ Set keycommand of 'org-capture to C-c c
     (:name "Upcoming Deadlines"
             :deadline future
             :order 10)
-    (:name "Habits"
-          :habit t
-          :order 7)          
+    (:name "Overdue"
+            :deadline past
+            :order 9)
   )
   )
 )
